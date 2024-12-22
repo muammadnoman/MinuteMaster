@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "cypress": "^13.17.0"
+  },
+  "devDependencies": {
+    "cypress-file-upload": "^5.0.8",
+    "cypress-if": "^1.13.2",
+    "cypress-mochawesome-reporter": "^3.8.2"
+  }
+}
