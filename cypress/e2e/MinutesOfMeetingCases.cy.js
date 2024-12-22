@@ -48,7 +48,6 @@ describe('Create Minutes of Meetings flow Test cases', () => {
     bookCasePage.selectAgenda(bookShelfName, agendaTitle)
     const instruction = `What is AI? \n How is beneficial? \n How it effects the World?`  //Text
     bookCasePage.produceMinutesFromTranscriptText(agendaTitle, instruction)
-    cy.pause()
     //Archive created Agenda after producing minutes
     bookCasePage.selectBookCase(bookCaseName)
     bookCasePage.selectAgenda(bookShelfName, agendaTitle)
@@ -83,7 +82,6 @@ describe('Create Minutes of Meetings flow Test cases', () => {
     bookCasePage.selectAgenda(bookShelfName, agendaTitle)
     const file = 'files/Minute Master.docx'
     bookCasePage.produceMinutesFromTranscriptFile(agendaTitle, file)
-    cy.pause()
     //Archive created Agenda after producing minutes
     bookCasePage.selectBookCase(bookCaseName)
     bookCasePage.selectAgenda(bookShelfName, agendaTitle)
