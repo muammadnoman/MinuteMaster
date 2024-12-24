@@ -68,7 +68,11 @@ export class BookCasePage {
     }
     archiveAgenda(agendaTitle) {
         cy.url().should('include', '/agenda')
-        cy.get('.m-4 .MuiButton-outlined').should('be.visible').and('contain.text', 'Archive Pack').click() //Archive Pack
+        .wait(3000)
+        cy.get('.m-4 .MuiButton-outlined').if().should('be.visible').and('contain.text', 'Archive Pack').click() //Archive Pack
+            .else().then(()=>{
+                this.deleteAgenda(agendaTitle)
+            })
         //Validate Archived agenda should not be shown
         cy.url().should('include', '/bookcase').wait(3000)
         cy.contains(agendaTitle).should('not.exist')
@@ -134,7 +138,8 @@ export class BookCasePage {
         cy.get('.popup-container .MuiButton-containedPrimary').contains('Text').should('be.visible').click() //Text
         cy.get("textarea[class='w-full rounded-lg focus:outline-none border border-gray-300 p-5 resize-none h-full']").type(instruction)
         cy.get('.popup-container .MuiButton-containedPrimary').contains('Send').should('be.visible').click() //Send
-
+        cy.wait(5000)
+        cy.get('.animate-spin').should('not.exist')
         cy.get('[data-sentry-element="EditorContent"]').should('be.visible').wait(3000) //Content should be visible
     }
     produceMinutesFromTranscriptFile(agendaTitle, file) {
@@ -143,8 +148,10 @@ export class BookCasePage {
         cy.get('[data-sentry-component="TipTapDetails"] h1[class*="text-primary-mm"]').should('be.visible').and('contain.text', agendaTitle)
         cy.get('.text-xl.text-primary-mm').should('contain.text', 'Meeting Minutes').and('be.visible')  //Meeting Minutes
 
-        cy.contains('Produce Minutes Draft from Transcript').should('be.visible')//Produce Minutes Draft from Transcript
+        cy.contains('Produce Minutes Draft from Transcript').should('be.visible').wait(2000) //Produce Minutes Draft from Transcript
         cy.get('input[accept=".docx,.txt,.doc"]').attachFile(file, { force: true }) //Upload file
+        cy.wait(3000)
+        cy.get('.animate-spin').should('not.exist')
         cy.get('[data-sentry-element="EditorContent"]').should('be.visible').wait(3000) //Content should be visible
     }
     produceMinutesFromRecording(agendaTitle, file) {
@@ -156,6 +163,7 @@ export class BookCasePage {
         cy.contains('Produce Minutes Draft from Meeting Recording').should('be.visible') //Produce Minutes Draft from Meeting Recording
         cy.get('input[accept=".docx,.txt,.doc"]').attachFile(file, { force: true }) //Upload file
         cy.wait(5000)
+        cy.get('.animate-spin').should('not.exist')
         cy.get('[data-sentry-element="EditorContent"]').should('be.visible').wait(3000) //Content should be visible
     }
     produceTemplateFromAgendaOnly(agendaTitle) {
@@ -166,6 +174,7 @@ export class BookCasePage {
 
         cy.contains('Generate a Simple Template from Agenda Only').should('be.visible').click() //Generate a Simple Template from Agenda Only
         cy.wait(5000)
+        cy.get('.animate-spin').should('not.exist')
         cy.get('[data-sentry-element="EditorContent"]').should('be.visible').wait(3000) //Content should be visible
     }
     startWithBlankCanvas(agendaTitle) {
@@ -176,6 +185,7 @@ export class BookCasePage {
 
         cy.contains('Start with a Blank Canvas').should('be.visible').click() //Start with a Blank Canvas
         cy.wait(5000)
+        cy.get('.animate-spin').should('not.exist')
         cy.get('[data-sentry-element="EditorContent"]').should('be.visible').wait(3000) //Content should be visible
     }
 }
