@@ -39,7 +39,7 @@ describe('Create Minutes of Meetings flow Test cases', () => {
     const agendaItem3 = ('AgendaItem_' + reusableCode.generateRandomString(4))
     bookCasePage.addAgendaItem(agendaItem3, agendaOwner, duration)
     //Add Recipient and publish agenda
-    const recipient = 'Nomanc Chaudhry'
+    const recipient = 'Noman Chaudhry'
     const recipientNote = 'Testing Recipient Notes'
     bookCasePage.publishAgenda(recipient, recipientNote)
     cy.verifyToast('Pack published successfully')
@@ -73,7 +73,7 @@ describe('Create Minutes of Meetings flow Test cases', () => {
     const duration = '55' //min
     bookCasePage.addAgendaItem(agendaItem, agendaOwner, duration)
     //Add Recipient and publish agenda
-    const recipient = 'Nomanc Chaudhry'
+    const recipient = 'Noman Chaudhry'
     const recipientNote = 'Testing Recipient Notes'
     bookCasePage.publishAgenda(recipient, recipientNote)
     cy.verifyToast('Pack published successfully')
@@ -107,7 +107,7 @@ describe('Create Minutes of Meetings flow Test cases', () => {
     const duration = '55' //min
     bookCasePage.addAgendaItem(agendaItem, agendaOwner, duration)
     //Add Recipient and publish agenda
-    const recipient = 'Nomanc Chaudhry'
+    const recipient = 'Noman Chaudhry'
     const recipientNote = 'Testing Recipient Notes'
     bookCasePage.publishAgenda(recipient, recipientNote)
     cy.verifyToast('Pack published successfully')
@@ -142,7 +142,7 @@ describe('Create Minutes of Meetings flow Test cases', () => {
     const duration = '55' //min
     bookCasePage.addAgendaItem(agendaItem, agendaOwner, duration)
     //Add Recipient and publish agenda
-    const recipient = 'Nomanc Chaudhry'
+    const recipient = 'Noman Chaudhry'
     const recipientNote = 'Testing Recipient Notes'
     bookCasePage.publishAgenda(recipient, recipientNote)
     cy.verifyToast('Pack published successfully')
@@ -178,7 +178,7 @@ describe('Create Minutes of Meetings flow Test cases', () => {
     const duration = '55' //min
     bookCasePage.addAgendaItem(agendaItem, agendaOwner, duration)
     //Add Recipient and publish agenda
-    const recipient = 'Nomanc Chaudhry'
+    const recipient = 'Noman Chaudhry'
     const recipientNote = 'Testing Recipient Notes'
     bookCasePage.publishAgenda(recipient, recipientNote)
     cy.verifyToast('Pack published successfully')
@@ -212,7 +212,7 @@ describe('Create Minutes of Meetings flow Test cases', () => {
     const duration = '55' //min
     bookCasePage.addAgendaItem(agendaItem, agendaOwner, duration)
     //Add Recipient and publish agenda
-    const recipient = 'Nomanc Chaudhry'
+    const recipient = 'Noman Chaudhry'
     const recipientNote = 'Testing Recipient Notes'
     bookCasePage.publishAgenda(recipient, recipientNote)
     cy.verifyToast('Pack published successfully')
