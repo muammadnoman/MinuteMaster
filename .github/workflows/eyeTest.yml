@@ -25,7 +25,7 @@ jobs:
         # Uses the official Cypress GitHub action https://github.com/cypress-io/github-action
         uses: cypress-io/github-action@v6
         with:
-          browser: chrome
+          browser: firefox
           headed: true
           spec: cypress/e2e/*.cy.js
           # Records to Cypress Cloud
