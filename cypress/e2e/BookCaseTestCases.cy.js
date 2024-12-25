@@ -52,7 +52,7 @@ describe('Bookcase Test cases', () => {
     const duration = '55' //min
     bookCasePage.addAgendaItem(agendaItem, agendaOwner, duration)
     //Add Recipient and publish agenda
-    const recipient = 'Nomanc Chaudhry'
+    const recipient = 'Noman Chaudhry'
     const recipientNote = 'Testing Recipient Notes'
     bookCasePage.publishAgenda(recipient, recipientNote)
     cy.verifyToast('Pack published successfully')
