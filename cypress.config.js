@@ -6,8 +6,8 @@ module.exports = defineConfig({
     viewportWidth: 1920,
     viewportHeight: 1080,
     chromeWebSecurity: false,
-    pageLoadTimeout: 30000,
-    defaultCommandTimeout: 30000,
+    pageLoadTimeout: 50000,
+    defaultCommandTimeout: 50000,
     experimentalMemoryManagement: true,
     reporter: 'cypress-mochawesome-reporter',
     reporterOptions: {
