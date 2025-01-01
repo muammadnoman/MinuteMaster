@@ -150,7 +150,7 @@ export class BookCasePage {
 
         cy.contains('Produce Minutes Draft from Transcript').should('be.visible').wait(2000) //Produce Minutes Draft from Transcript
         cy.get('input[accept=".docx,.txt,.doc"]').attachFile(file, { force: true }) //Upload file
-        cy.wait(5000)
+        cy.wait(7000)
         cy.get('.animate-spin').should('not.exist')
         cy.get('[data-sentry-element="EditorContent"]').should('be.visible').wait(3000) //Content should be visible
     }
