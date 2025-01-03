@@ -43,6 +43,7 @@ describe('Create Minutes of Meetings flow Test cases', () => {
     const recipientNote = 'Testing Recipient Notes'
     bookCasePage.publishAgenda(recipient, recipientNote)
     cy.verifyToast('Pack published successfully')
+    cy.reload()
     //Produce Meeting Minutes using text instructions
     bookCasePage.selectBookCase(bookCaseName)
     bookCasePage.selectAgenda(bookShelfName, agendaTitle)
@@ -77,6 +78,7 @@ describe('Create Minutes of Meetings flow Test cases', () => {
     const recipientNote = 'Testing Recipient Notes'
     bookCasePage.publishAgenda(recipient, recipientNote)
     cy.verifyToast('Pack published successfully')
+    cy.reload()
     //Produce Meeting Minutes using text instructions
     bookCasePage.selectBookCase(bookCaseName)
     bookCasePage.selectAgenda(bookShelfName, agendaTitle)
@@ -111,6 +113,7 @@ describe('Create Minutes of Meetings flow Test cases', () => {
     const recipientNote = 'Testing Recipient Notes'
     bookCasePage.publishAgenda(recipient, recipientNote)
     cy.verifyToast('Pack published successfully')
+    cy.reload()
     //Produce Meeting Minutes using text instructions
     bookCasePage.selectBookCase(bookCaseName)
     bookCasePage.selectAgenda(bookShelfName, agendaTitle)
@@ -146,6 +149,7 @@ describe('Create Minutes of Meetings flow Test cases', () => {
     const recipientNote = 'Testing Recipient Notes'
     bookCasePage.publishAgenda(recipient, recipientNote)
     cy.verifyToast('Pack published successfully')
+    cy.reload()
     //Produce Meeting Minutes using text instructions
     bookCasePage.selectBookCase(bookCaseName)
     bookCasePage.selectAgenda(bookShelfName, agendaTitle)
@@ -182,6 +186,7 @@ describe('Create Minutes of Meetings flow Test cases', () => {
     const recipientNote = 'Testing Recipient Notes'
     bookCasePage.publishAgenda(recipient, recipientNote)
     cy.verifyToast('Pack published successfully')
+    cy.reload()
     //Produce Meeting Minutes using text instructions
     bookCasePage.selectBookCase(bookCaseName)
     bookCasePage.selectAgenda(bookShelfName, agendaTitle)
@@ -216,6 +221,7 @@ describe('Create Minutes of Meetings flow Test cases', () => {
     const recipientNote = 'Testing Recipient Notes'
     bookCasePage.publishAgenda(recipient, recipientNote)
     cy.verifyToast('Pack published successfully')
+    cy.reload()
     //Produce Meeting Minutes using text instructions
     bookCasePage.selectBookCase(bookCaseName)
     bookCasePage.selectAgenda(bookShelfName, agendaTitle)

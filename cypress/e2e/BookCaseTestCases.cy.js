@@ -56,6 +56,7 @@ describe('Bookcase Test cases', () => {
     const recipientNote = 'Testing Recipient Notes'
     bookCasePage.publishAgenda(recipient, recipientNote)
     cy.verifyToast('Pack published successfully')
+    cy.reload()
     //Delete created Agenda
     bookCasePage.selectBookCase(bookCaseName)
     bookCasePage.selectAgenda(bookShelfName, agendaTitle)

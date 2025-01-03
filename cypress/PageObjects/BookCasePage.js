@@ -10,7 +10,7 @@ export class BookCasePage {
         cy.get('[class*="MuiDialog-root backdrop-blur-sm bg-white/30 MuiModal-root css-"] button[data-sentry-element="Button"]').should('be.visible').and('contain.text', 'Create new Bookcase').click()  // Save the new bookcase
     }
     selectBookCase(bookCaseName) {
-        cy.get('[class="py-1 cursor-pointer hover:bg-gray-100"]').contains(bookCaseName).should('exist').click()
+        cy.get('[class*="py-1 cursor-pointer hover:bg-gray-100"]').contains(bookCaseName).should('exist').click()
         this.validateBookCase(bookCaseName)
     }
     validateBookCase(bookCaseName) {
@@ -35,7 +35,7 @@ export class BookCasePage {
         cy.get('[data-sentry-component="NavList"]:nth-child(1) .MuiListItemText-primary').should('be.visible').and('contain.text', 'Bookcases').click().wait(1000)
     }
     deleteBookCase(bookCaseName) {
-        cy.get('[class="py-1 cursor-pointer hover:bg-gray-100"]').contains(bookCaseName).parents('div[class="py-1 cursor-pointer hover:bg-gray-100"]').find('[data-sentry-element="IconButton"][data-sentry-source-file="ShowBookcases.tsx"]').click() //3dots
+        cy.get('[data-sentry-component="BookcaseDisplay"] .py-1.cursor-pointer').contains(bookCaseName).parents('div[class*="py-1 cursor-pointer hover:bg-gray-100"]').find('[data-sentry-element="IconButton"][data-sentry-source-file="ShowBookcases.tsx"]').click() //3dots
         cy.get('[role="menuitem"]:nth-child(2)').should('exist').and('contain.text', 'Delete').click({ force: true }) //Delete
         cy.verifyToast('Bookcase deleted successfully')
     }
@@ -49,8 +49,8 @@ export class BookCasePage {
         cy.get('[data-sentry-source-file="BookshelfDisplay.tsx"] p.text-black').contains(bookShelfName).should('not.exist')
     }
     selectAgenda(bookShelfName, agendaTitle) {
-        cy.get('[class="manropeFont mb-8"]').contains(bookShelfName) //Find bookShelf
-            .parents('[class="manropeFont mb-8"]').find('[class="bookcover-bg pt-6 pb-2"]')
+        cy.get('[class*="manropeFont mb-8"]').contains(bookShelfName) //Find bookShelf
+            .parents('[class*="manropeFont mb-8"]').find('[class*="bookcover-bg pt-6 pb-2"]')
             .contains(agendaTitle).parents('[class="manropeFont mb-8"] a[href*="/agenda/"]').should('be.visible').click({ force: true })//select agenda
         cy.url().should('include', '/agenda')
     }
@@ -68,9 +68,9 @@ export class BookCasePage {
     }
     archiveAgenda(agendaTitle) {
         cy.url().should('include', '/agenda')
-        .wait(3000)
+            .wait(3000)
         cy.get('.m-4 .MuiButton-outlined').if().should('be.visible').and('contain.text', 'Archive Pack').click() //Archive Pack
-            .else().then(()=>{
+            .else().then(() => {
                 this.deleteAgenda(agendaTitle)
             })
         //Validate Archived agenda should not be shown
@@ -105,7 +105,7 @@ export class BookCasePage {
         })
     }
     publishAgenda(recipient, recipientNote) {
-        cy.get('.MuiButton-containedPrimary[data-sentry-source-file="CreateAgendaHeader.tsx"]').scrollIntoView().should('be.visible').and('contain.text', 'Publish').click().wait(3000) //Publish
+        cy.get('.MuiButton-containedPrimary[data-sentry-source-file="CreateAgendaHeader.tsx"]').scrollIntoView().should('not.be.disabled').and('be.visible').and('contain.text', 'Publish').click().wait(3000) //Publish
 
         //Select Recipient
         cy.get('h2[class="text-primary-mm text-2xl font-medium m-0"]').if('visible').then((ele) => {
@@ -137,8 +137,13 @@ export class BookCasePage {
         cy.get('.mb-0.text-center').should('contain.text', 'Please select your transcript input type').and('be.visible')
         cy.get('.popup-container .MuiButton-containedPrimary').contains('Text').should('be.visible').click() //Text
         cy.get("textarea[class='w-full rounded-lg focus:outline-none border border-gray-300 p-5 resize-none h-full']").type(instruction)
-        cy.get('.popup-container .MuiButton-containedPrimary').contains('Send').should('be.visible').click() //Send
-        cy.wait(5000)
+        cy.get('.popup-container .MuiButton-containedPrimary').contains('Send').should('be.visible').click().wait(1000) //Send
+        //if confirmation toast apeared for shor content
+        cy.get('.MuiPaper-root').if().then(modal => {
+            cy.get(modal).should('be.visible').and('contain.text', 'The content provided appears to be too short. Would you like to upload different content or proceed anyway?')
+            cy.get('[data-sentry-component="WarningModal"] .MuiButton-outlined').should('be.visible').and('contain.text', 'Proceed Anyway').click()  //Proceed Anyway
+        })
+        cy.wait(7000)
         cy.get('.animate-spin').should('not.exist')
         cy.get('[data-sentry-element="EditorContent"]').should('be.visible').wait(3000) //Content should be visible
     }
@@ -149,7 +154,12 @@ export class BookCasePage {
         cy.get('.text-xl.text-primary-mm').should('contain.text', 'Meeting Minutes').and('be.visible')  //Meeting Minutes
 
         cy.contains('Produce Minutes Draft from Transcript').should('be.visible').wait(2000) //Produce Minutes Draft from Transcript
-        cy.get('input[accept=".docx,.txt,.doc"]').attachFile(file, { force: true }) //Upload file
+        cy.get('input[accept=".docx,.txt,.doc"]').attachFile(file, { force: true }).wait(4000) //Upload file
+        //if confirmation toast apeared for shor content
+        cy.get('.MuiPaper-root').if().then(modal => {
+            cy.get(modal).should('be.visible').and('contain.text', 'The content provided appears to be too short. Would you like to upload different content or proceed anyway?')
+            cy.get('[data-sentry-component="WarningModal"] .MuiButton-outlined').should('be.visible').and('contain.text', 'Proceed Anyway').click()  //Proceed Anyway
+        })
         cy.wait(7000)
         cy.get('.animate-spin').should('not.exist')
         cy.get('[data-sentry-element="EditorContent"]').should('be.visible').wait(3000) //Content should be visible
@@ -161,7 +171,12 @@ export class BookCasePage {
         cy.get('.text-xl.text-primary-mm').should('contain.text', 'Meeting Minutes').and('be.visible')  //Meeting Minutes
 
         cy.contains('Produce Minutes Draft from Meeting Recording').should('be.visible') //Produce Minutes Draft from Meeting Recording
-        cy.get('input[accept=".docx,.txt,.doc"]').attachFile(file, { force: true }) //Upload file
+        cy.get('input[accept=".docx,.txt,.doc"]').attachFile(file, { force: true }).wait(4000) //Upload file
+        //if confirmation toast apeared for shor content
+        cy.get('.MuiPaper-root').if().then(modal => {
+            cy.get(modal).should('be.visible').and('contain.text', 'The content provided appears to be too short. Would you like to upload different content or proceed anyway?')
+            cy.get('[data-sentry-component="WarningModal"] .MuiButton-outlined').should('be.visible').and('contain.text', 'Proceed Anyway').click()  //Proceed Anyway
+        })
         cy.wait(5000)
         cy.get('.animate-spin').should('not.exist')
         cy.get('[data-sentry-element="EditorContent"]').should('be.visible').wait(3000) //Content should be visible
